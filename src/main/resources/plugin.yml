@@ -1,0 +1,13 @@
+main: pws.Luqky.WsPlugin
+version: 1.0.0
+name: WsPlugin
+author: Luqky
+api-version: 1.20
+
+commands:
+  jail:
+    description: Send a player to the jail
+    aliases:
+      - jl
+    permission: wsplugin.commands.jail
+    permission-message: "You do not have permission to use this command"

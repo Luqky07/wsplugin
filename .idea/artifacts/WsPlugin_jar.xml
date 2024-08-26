@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WsPlugin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/WsPlugin_jar</output-path>
+    <root id="archive" name="WsPlugin.jar">
+      <element id="module-output" name="WsPlugin" />
+    </root>
+  </artifact>
+</component>
