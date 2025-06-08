@@ -2,7 +2,7 @@ main: pws.Luqky.WsPlugin
 version: 1.0.0
 name: WsPlugin
 author: Luqky
-api-version: 1.20
+api-version: 1.21
 
 commands:
   jail:

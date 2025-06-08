@@ -1,12 +1,12 @@
 package pws.Luqky.listeners;
 
-import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import net.kyori.adventure.text.Component;
 import pws.Luqky.config.ConfigPrisonerPlayers;
 
 import java.util.List;
@@ -30,8 +30,8 @@ public class PlayerListener implements Listener {
         List<Player> players = player.getWorld().getPlayers();
 
         //When the server is empty and the player is on the prisoners list the player is kicked
-        if(prisionerPlayers.contains(player.getName()) && players.isEmpty()){
-            player.kickPlayer("You can not access when other player are not playing");
+        if(prisionerPlayers.contains(player.getName()) && players.size() == 1){
+            player.kick(Component.text("You can not access when other player are not playing"));
         }
     }
 
@@ -63,7 +63,7 @@ public class PlayerListener implements Listener {
         //If all the players are in the prisoner list then they are kicked
         if(!validPlayer){
             for(Player p : players){
-                p.kickPlayer("You can not access when other player are not playing");
+                p.kick(Component.text("You can not access when other player are not playing"));
             }
         }
     }

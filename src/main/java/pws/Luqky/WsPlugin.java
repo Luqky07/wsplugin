@@ -1,7 +1,5 @@
 package pws.Luqky;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import pws.Luqky.commands.JailCommands;
 import pws.Luqky.config.ConfigPrisonerPlayers;
@@ -20,11 +18,6 @@ public class WsPlugin extends JavaPlugin {
 
         registerCommands();
         registerEvents();
-    }
-
-    //Execution when server stops
-    public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',  "&cBye World!"));
     }
 
     //Function to register custom commands

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ConfigPrisonerPlayers {
     private CustomConfig customConfig;
-    private WsPlugin wsPlugin;
+    protected WsPlugin wsPlugin;
     private List<String> prisonerPlayers;
 
     //Constructor to initialize the custom config for prisoners

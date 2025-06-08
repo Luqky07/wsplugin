@@ -9,6 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import net.kyori.adventure.text.format.NamedTextColor;
 import pws.Luqky.config.ConfigPrisonerPlayers;
 import pws.Luqky.utils.MessageUtils;
 
@@ -27,13 +29,13 @@ public class JailCommands implements CommandExecutor {
 
         //Validate permission
         if(!sender.hasPermission("wsplugin.commands.jail")){
-            sender.sendMessage(MessageUtils.colorMessage("&c&l", "You do not have permission to use this command!"));
+            sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "You do not have permission to use this command!"));
             return true;
         }
 
         //Validate arguments length
         if(args.length == 0){
-            sender.sendMessage(MessageUtils.colorMessage("&c&l", "The command needs at least one argument."));
+            sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.YELLOW, "The command needs at least one argument."));
             return true;
         }
 
@@ -54,35 +56,35 @@ public class JailCommands implements CommandExecutor {
                 createJail(jailLocation, 3, 2, Material.BEDROCK);
                 break;
             case "list": //Show de player on the prisoners list
-                sender.sendMessage(MessageUtils.colorMessage("&6&l", "The players on the prisoner list are:"));
+                sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GOLD, "The players on the prisoner list are:"));
                 for(String p : prisionerPlayers){
-                    sender.sendMessage(MessageUtils.colorMessage("&e&o", "- " + p));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.BLUE, "- " + p));
                 }
                 break;
             case "free": //Free a player
 
                 //The option free needs at least 2 arguments to be executed
                 if(args.length < 2){
-                    sender.sendMessage(MessageUtils.colorMessage("&c&l", "The option free needs at least two arguments."));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "The option free needs at least two arguments."));
                     break;
                 }
 
                 //Searching the player
                 prisioner = Bukkit.getPlayer(args[1]);
                 if(prisioner == null){
-                    sender.sendMessage(MessageUtils.colorMessage("&c&l", "The player is not online!"));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "The player is not online!"));
                     break;
                 }
 
                 //Control to ensure the player is on the prisoner list
                 if(!prisionerPlayers.contains(prisioner.getName())){
-                    sender.sendMessage(MessageUtils.colorMessage("&c&l", "The player is not on the prisoners list"));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "The player is not on the prisoners list"));
                     break;
                 }
 
                 //Control to prevent a player from freeing themselves
                 if(sender.getName().equalsIgnoreCase(args[0])){
-                    sender.sendMessage(MessageUtils.colorMessage("&c&l", "You cannot free yourself!"));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "You cannot free yourself!"));
                     break;
                 }
 
@@ -95,7 +97,7 @@ public class JailCommands implements CommandExecutor {
                 }
 
                 //Send a message to the target player
-                prisioner.sendMessage(MessageUtils.colorMessage("&c&l", "You are going to be free!"));
+                prisioner.sendMessage(MessageUtils.colorMessage(NamedTextColor.GOLD, "You are going to be free!"));
 
                 //Teleport the target player to his respawn
                 prisioner.teleport(spawn);
@@ -105,14 +107,14 @@ public class JailCommands implements CommandExecutor {
 
                 //Control to prevent a player from imprisoning themselves
                 if(sender.getName().equalsIgnoreCase(args[0])){
-                    sender.sendMessage(MessageUtils.colorMessage("&c&l", "You cannot send yourself to the jail!"));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "You cannot send yourself to the jail!"));
                     break;
                 }
 
                 //Searching the player
                 prisioner = Bukkit.getPlayer(args[0]);
                 if(prisioner == null){
-                    sender.sendMessage(MessageUtils.colorMessage("&c&l", "The player is not online!"));
+                    sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "The player is not online!"));
                     break;
                 }
 
@@ -120,7 +122,7 @@ public class JailCommands implements CommandExecutor {
                 createJail(jailLocation, 3, 2, Material.BEDROCK);
 
                 //Send a message to the target player
-                prisioner.sendMessage(MessageUtils.colorMessage("&c&l", "You are going to go to jail!"));
+                prisioner.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "You are going to go to jail!"));
 
                 //Teleport the target player to the jail
                 prisioner.teleport(jailLocation);
@@ -130,12 +132,12 @@ public class JailCommands implements CommandExecutor {
     }
 
     public void help(CommandSender sender){
-        sender.sendMessage(MessageUtils.colorMessage("&a&l&n", "Commands /jail /jl"));
-        sender.sendMessage(MessageUtils.colorMessage("&a&o", "/jail help: Show the help guide"));
-        sender.sendMessage(MessageUtils.colorMessage("&a&o", "/jail create: Create a jail in x = 300, y = 300 and z = 300"));
-        sender.sendMessage(MessageUtils.colorMessage("&a&o", "/jail list: Show de prisoner list"));
-        sender.sendMessage(MessageUtils.colorMessage("&a&o", "/jail [PlayerNickname]: Send a player to the jail"));
-        sender.sendMessage(MessageUtils.colorMessage("&a&o", "/jail free [PlayerNickname]: Send a player to his spawn point"));
+        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GOLD, "Commands /jail /jl"));
+        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail help: Show the help guide"));
+        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail create: Create a jail in x = 300, y = 300 and z = 300"));
+        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail list: Show de prisoner list"));
+        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail [PlayerNickname]: Send a player to the jail"));
+        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail free [PlayerNickname]: Send a player to his spawn point"));
     }
 
     private static void createJail(Location location, int size, int thickness, Material material) {

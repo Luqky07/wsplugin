@@ -1,10 +1,11 @@
 package pws.Luqky.utils;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 
 public class MessageUtils {
     //Utility to help creating colorful and stylish messages to the players
-    public static String colorMessage(String color, String message){
-        return ChatColor.translateAlternateColorCodes('&', color + message);
+    public static Component colorMessage(TextColor color, String message){
+        return Component.text(message).color(color);
     }
 }
