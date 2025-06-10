@@ -44,25 +44,20 @@ public class JailCommands implements CommandExecutor {
         Location jailLocation = new Location(world, 300, 300, 300);
 
         Player prisioner;
-
-        configPrisonerPlayers.reloadConfig();
         List<String> prisionerPlayers = configPrisonerPlayers.getPrisonerPlayers();
 
         switch (args[0].toLowerCase()){
             case "help": //Show help
                 help(sender);
                 break;
-            case "create": //Create a BEDROCK jail
-                createJail(jailLocation, 3, 2, Material.BEDROCK);
-                break;
             case "list": //Show de player on the prisoners list
+                configPrisonerPlayers.reloadConfig();
                 sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GOLD, "The players on the prisoner list are:"));
                 for(String p : prisionerPlayers){
                     sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.BLUE, "- " + p));
                 }
                 break;
             case "free": //Free a player
-
                 //The option free needs at least 2 arguments to be executed
                 if(args.length < 2){
                     sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.RED, "The option free needs at least two arguments."));
@@ -134,7 +129,6 @@ public class JailCommands implements CommandExecutor {
     public void help(CommandSender sender){
         sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GOLD, "Commands /jail /jl"));
         sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail help: Show the help guide"));
-        sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail create: Create a jail in x = 300, y = 300 and z = 300"));
         sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail list: Show de prisoner list"));
         sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail [PlayerNickname]: Send a player to the jail"));
         sender.sendMessage(MessageUtils.colorMessage(NamedTextColor.GREEN, "/jail free [PlayerNickname]: Send a player to his spawn point"));

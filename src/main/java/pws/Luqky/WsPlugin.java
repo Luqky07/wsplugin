@@ -10,14 +10,21 @@ import java.util.Objects;
 public class WsPlugin extends JavaPlugin {
     //Custom configuration for prisoners
     private ConfigPrisonerPlayers configPrisonerPlayers;
+     private static WsPlugin instance;
 
     //Execution when server starts
     public void onEnable() {
+        instance = this;
         configPrisonerPlayers = new ConfigPrisonerPlayers(this);
         configPrisonerPlayers.loadConfig();
 
         registerCommands();
         registerEvents();
+    }
+
+    @Override
+    public void onDisable() {
+        instance = null;
     }
 
     //Function to register custom commands
@@ -28,5 +35,9 @@ public class WsPlugin extends JavaPlugin {
     //Function to register custom event handlers
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new PlayerListener(this.configPrisonerPlayers), this);
+    }
+
+    public static WsPlugin getInstance() {
+        return instance;
     }
 }
